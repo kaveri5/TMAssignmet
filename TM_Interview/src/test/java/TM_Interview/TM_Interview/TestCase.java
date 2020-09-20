@@ -38,14 +38,49 @@ public class TestCase extends Base{
 		   
 		  formPage.femaleOption.click();
 		  formPage.getcountrySelection().click();
-		  
-		   driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Argentina\"));");
+	
+
+	     driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Argentina\"));");
  
 	     formPage.SelectCountry.click();
 	     formPage.LetShop.click();
-	
+	     
+	     CheckoutPage checkoutPage = new CheckoutPage(driver);
+	     
+	     driver.findElements(By.xpath("//*[@text='ADD TO CART']")).get(0).click();
+	     driver.findElements(By.xpath("//*[@text='ADD TO CART']")).get(0).click();
+	 	
+		 checkoutPage.ClickCart.click();
+		    Thread.sleep(4000);
+		    
+			int count=driver.findElements(By.id("com.androidsample.generalstore:id/productPrice")).size();
+			double sum=0;
+			CheckoutPage checkOutPage=new CheckoutPage(driver);
+			
+			for(int i=0;i<count;i++)
+			{
+			String amount1=	checkOutPage.productList.get(i).getText();
+			double amount=getAmount(amount1);
+			sum=sum+amount;//280.97+116.97.
+			}
+	System.out.println(sum+"sum of products");
 
-	    	}
+	String total=checkOutPage.totalAmount.getText();
+
+	total= total.substring(1);
+	double totalValue=Double.parseDouble(total);
+	System.out.println(totalValue+"Total value of products");
+	AssertJUnit.assertEquals(sum, totalValue);  
+	
+		}
+	public static double getAmount(String value)
+	{
+		value= value.substring(1);
+		double amount2value=Double.parseDouble(value);
+		return amount2value;
+		
+		
+	}
 
 	}
 
