@@ -38,6 +38,11 @@ public class TestCase extends Base{
 		   
 		  formPage.femaleOption.click();
 		  formPage.getcountrySelection().click();
+		  
+		   driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Argentina\"));");
+ 
+	     formPage.SelectCountry.click();
+	     formPage.LetShop.click();
 	
 
 	    	}
